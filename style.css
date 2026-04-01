@@ -268,7 +268,7 @@ p.sub {
   display: none;
 }
 
-.form {
+#form {
   display: none;
   background: #0d0d1a;
   border: 1px solid #1e1e30;
@@ -351,6 +351,10 @@ p.sub {
   font-weight: 600;
   margin-top: 2px;
   transition: opacity 0.15s
+}
+
+#analytics {
+  display: none;
 }
 
 

@@ -16,23 +16,23 @@
                 <h1>Finance Tracker</h1>
                 <p class="sub">Your personal money dashboard</p>
             </div>
-            <time id="date" datetime="10">1 Apr 2026</time>
+            <time id="date" datetime="10"></time>
         </header>
 
         <section class="balance-section">
 
             <span class="balance-head">Total balance</span>
-            <h3 id="total-balance">₦70,000</h3>
+            <h3 id="total-balance">₦0.00</h3>
             <div class="balance-breakdown">
                 <div class="income small">
                     <div class="dot"></div>
                     <span>Income</span>
-                    <span class="income-amount">₦70,000</span>
+                    <span class="income-amount">₦0.00</span>
                 </div>
                 <div class="spent small">
                     <div class="dot s-dot"></div>
                     <span>Spent</span>
-                    <span class="spent-amount">₦70,000</span>
+                    <span class="spent-amount">₦0.00</span>
                 </div>
             </div>
             <div class="progress">
@@ -48,16 +48,16 @@
                     <span>INCOME</span>
                     <div>↓</div>
                 </div>
-                <h4 id="total-income">₦50,000</h4>
-                <span>0 transactions</span>
+                <h4 id="total-income">₦0.00</h4>
+                <span id="t-income-track">0 transactions</span>
             </div>
             <div class="expenses-stat">
                 <div>
                     <span>EXPENSES</span>
                     <div>↑</div>
                 </div>
-                <h4 id="total-expenses">₦50,000</h4>
-                <span>0 transactions</span>
+                <h4 id="total-expenses">₦0.00</h4>
+                <span id="t-expense-track">0 transactions</span>
             </div>
         </section>
 
@@ -67,15 +67,15 @@
             <button class="tab-btn">Analytics</button>
         </section>
 
-        <section id="filters">
-            <button class="filter-btn active">All</button>
-            <button class="filter-btn">Income</button>
-            <button class="filter-btn">Expense</button>
-            <button class="filter-btn">Salary</button>
-            <button class="filter-btn">Gift</button>
-        </section>
-
-        <section class="transactions-section">
+        
+        <section id="transactions-section">
+            <div id="filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Income</button>
+                <button class="filter-btn">Expense</button>
+                <button class="filter-btn">Salary</button>
+                <button class="filter-btn">Gift</button>
+            </div>
             <ul class="list all-transaction-list" id="all-transaction-list">
                 <li id="empty-state">No transactions yet — add one to get started</li>
             </ul>
@@ -97,7 +97,7 @@
             </ul>
         </section>
 
-        <article class="form">
+        <article id="form">
             <div class="transaction-type-btns">
                 <button class="trans-type-btn" id="income-type-btn">↓ Income</button>
                 <button class="trans-type-btn" id="expense-type-btn">↑ Expense</button>
@@ -124,6 +124,12 @@
                 </label>
             </form>
             <button class="add-transaction" id="add-transc-btn">Add transaction</button>
+        </article>
+
+        <article id="analytics">
+            <div>
+                <canvas></canvas>
+            </div>
         </article>
     </main>
 
