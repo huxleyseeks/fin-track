@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./icons/fintrack-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <title>FinTrack</title>
+</head>
+<body>
+
+    <main>
+
+        <header>
+            <div>
+                <h1>Finance Tracker</h1>
+                <p class="sub">Your personal money dashboard</p>
+            </div>
+            <time id="date" datetime="10">1 Apr 2026</time>
+        </header>
+
+        <section class="balance-section">
+
+            <span class="balance-head">Total balance</span>
+            <h3 id="total-balance">₦70,000</h3>
+            <div class="balance-breakdown">
+                <div class="income small">
+                    <div class="dot"></div>
+                    <span>Income</span>
+                    <span class="income-amount">₦70,000</span>
+                </div>
+                <div class="spent small">
+                    <div class="dot s-dot"></div>
+                    <span>Spent</span>
+                    <span class="spent-amount">₦70,000</span>
+                </div>
+            </div>
+            <div class="progress">
+                <span class="spending-rate">Spending rate</span>
+                <span class="pct">0%</span>
+            </div>
+            <div id="prog-track"></div>
+        </section>
+
+        <section class="stats-grid">
+            <div class="income-stat">
+                <div>
+                    <span>INCOME</span>
+                    <div>↓</div>
+                </div>
+                <h4 id="total-income">₦50,000</h4>
+                <span>0 transactions</span>
+            </div>
+            <div class="expenses-stat">
+                <div>
+                    <span>EXPENSES</span>
+                    <div>↑</div>
+                </div>
+                <h4 id="total-expenses">₦50,000</h4>
+                <span>0 transactions</span>
+            </div>
+        </section>
+
+        <section class="tabs">
+            <button class="tab-btn active">Transactions</button>
+            <button class="tab-btn">Add new</button>
+            <button class="tab-btn">Analytics</button>
+        </section>
+
+        <section id="filters">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Income</button>
+            <button class="filter-btn">Expense</button>
+            <button class="filter-btn">Salary</button>
+            <button class="filter-btn">Gift</button>
+        </section>
+
+        <section class="transactions-section">
+            <ul class="list all-transaction-list" id="all-transaction-list">
+                <li id="empty-state">No transactions yet — add one to get started</li>
+            </ul>
+
+            <ul class="list inactive income-list" id="income-list">
+                <li id="empty-state">No transactions found.</li>
+            </ul>
+
+            <ul class="list inactive expense-list" id="expense-list">
+                <li id="empty-state">No transactions found.</li>
+            </ul>
+
+            <ul class="list inactive salary-list" id="salary-list">
+                <li id="empty-state">No transactions found.</li>
+            </ul>
+
+            <ul class="list inactive gift-list" id="gift-list">
+                <li id="empty-state">No transactions found.</li>
+            </ul>
+        </section>
+
+        <article>
+            <div>
+                <button>↓ Income</button>
+                <button>↑ Expense</button>
+            </div>
+
+            <form action="">
+                <input type="number" name="amount" id="f-amount" placeholder="Amount (₦)">
+                <select name="income-category" id="f-input" title="income-selection">
+                    <option value="">Category</option>
+                    <option value="">Salary</option>
+                    <option value="">Freelance</option>
+                    <option value="">Gift</option>
+                    <option value="">Investment</option>
+                    <option value="">Other</option>
+                </select>
+
+                <label for="f-note">
+                    <input type="text" name="note" id="f-note" placeholder="Note (optional)">
+                </label>
+                <label for="f-date">
+                    <input type="date" name="date" id="f-date" placeholder="#">
+                </label>
+            </form>
+            <button class="add-transaction" id="add-transc-btn">Add transaction</button>
+        </article>
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+</html>
