@@ -97,22 +97,24 @@
             </ul>
         </section>
 
-        <article>
-            <div>
-                <button>↓ Income</button>
-                <button>↑ Expense</button>
+        <article class="form">
+            <div class="transaction-type-btns">
+                <button class="trans-type-btn" id="income-type-btn">↓ Income</button>
+                <button class="trans-type-btn" id="expense-type-btn">↑ Expense</button>
             </div>
 
             <form action="">
-                <input type="number" name="amount" id="f-amount" placeholder="Amount (₦)">
-                <select name="income-category" id="f-input" title="income-selection">
-                    <option value="">Category</option>
-                    <option value="">Salary</option>
-                    <option value="">Freelance</option>
-                    <option value="">Gift</option>
-                    <option value="">Investment</option>
-                    <option value="">Other</option>
-                </select>
+                <div class="amt-cat">
+                    <input type="number" name="amount" id="f-amount" placeholder="Amount (₦)" required>
+                    <select name="income-category" id="inc-input" title="income-selection">
+                        <option value="">Category</option>
+                        <option value="">Salary</option>
+                        <option value="">Freelance</option>
+                        <option value="">Gift</option>
+                        <option value="">Investment</option>
+                        <option value="">Other</option>
+                    </select>
+                </div>
 
                 <label for="f-note">
                     <input type="text" name="note" id="f-note" placeholder="Note (optional)">

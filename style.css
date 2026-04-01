@@ -182,11 +182,13 @@ p.sub {
 #total-income {
   font-size: 1.3rem;
   color: #49de80;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 #total-expenses {
   font-size: 1.3rem;
   color: #f77272;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .income-stat > span, .expenses-stat > span {
@@ -250,11 +252,14 @@ p.sub {
 .list {
   list-style: none;
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  min-height: 150px;
 }
 
 #empty-state {
-  margin: 3rem auto 0;
+  /* margin: 3rem auto 0; */
   color: #333;
   font-size: .8rem;
 }
@@ -263,7 +268,90 @@ p.sub {
   display: none;
 }
 
+.form {
+  display: none;
+  background: #0d0d1a;
+  border: 1px solid #1e1e30;
+  border-radius: 1rem;
+  padding: 1.3rem 1.3rem 2.5rem;
+}
 
+.transaction-type-btns {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+
+.trans-type-btn {
+  flex: 1;
+  padding: .6rem;
+  border: 0;
+  border-radius: 8px;
+  font-family: inherit;
+  color: #f7fcfc;
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid #1e1e30;
+}
+
+#income-type-btn:focus {
+  background: #111c21;
+  color: #49de80;
+  border: 1px solid #49de80;
+}
+#expense-type-btn:focus {
+  background: #1f1521;
+  color: #f77272;
+  border: 1px solid #f77272;
+}
+
+.amt-cat {
+  width: 100%;
+  display: flex;
+  gap: .5rem;
+  margin-bottom: .6rem;
+}
+
+#f-amount, #inc-input, #f-note, #f-date {
+  padding: 10px 12px;
+  font-size: 13px;
+  border: 1px solid #1e1e30;
+  border-radius: 8px;
+  background: #12121e;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.15s;
+  flex: 1;
+}
+
+#f-amount::placeholder, #f-note::placeholder {
+  color: #333;
+}
+
+#f-note {
+  width: 100%;
+  margin-bottom: .6rem;
+}
+
+#f-date {
+  width: 50%;
+  text-transform: uppercase;
+  margin-bottom: .6rem;
+}
+
+.add-transaction {
+  width: 100%;
+  padding: 11px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: none;
+  background: #6366f1;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 2px;
+  transition: opacity 0.15s
+}
 
 
 .segmented {
