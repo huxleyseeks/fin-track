@@ -65,6 +65,9 @@ let text = null;
 let incAmt = 0;
 let speAmt = 0;
 
+let activeFilter = "all";
+let activeFilterIndex = 0;
+
 
 
 // addTransaction()      → validate and add to array
@@ -320,7 +323,12 @@ function filterTransactions(type, tab) {
 function deleteTransaction(id) {
     transactions = transactions.filter((trans) => trans.id !== id);
     saveData();
-    loadData();
+    if (activeFilter === "all") {
+      loadData();
+    } else {
+      filterTransactions(activeFilter, lists[activeFilterIndex]);
+      renderSummary();
+    }
 }
 
 // saveData()            → save to localStorage
@@ -401,6 +409,10 @@ filterTypeBtns.forEach((btn, i) => {
         lists.forEach(list => {
             list.style.display = "none";
         })
+
+        activeFilter = filterTypes[i];
+        activeFilterIndex = i;
+
         lists[i].style.display = "flex";
         filterTransactions(filterTypes[i], lists[i]);
         switchTabs(filterTypeBtns, lists, i)
