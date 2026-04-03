@@ -212,9 +212,17 @@ function renderSummary() {
     
     const spendingRate = incomeAmt > 0 ? (spentAmt / incomeAmt) * 100 : 0;
 
-    pct.textContent = `${Math.round(spendingRate)}%`;
+    if (Math.round(spendingRate) > 100) {
+        pct.textContent = `${Math.round(100)}%`;
+    } else {
+        pct.textContent = `${Math.round(spendingRate)}%`;
+    }
     // keep progress bar from overflowing if spending > income
-    progFill.style.width = `${Math.min(spendingRate, 100)}%`;
+    if (Math.round(spendingRate === 0)) {
+        progFill.style.width = `${0}%`;
+    } else {
+        progFill.style.width = `${Math.min(spendingRate, 100)}%`;
+    }
 }
 
 function deleteTransaction(id) {
@@ -230,9 +238,9 @@ function saveData() {
 function loadData() {
     const getTransactions = JSON.parse(localStorage.getItem("transactions"));
     if (getTransactions.length === 0 || !getTransactions) {
+        renderSummary();
         allTransactionList.innerHTML = `<li class="empty-state">No transactions yet — add one to get started</li>`;
         emptyStateall.style.display = "block";
-        renderSummary();
         return;
     }
     renderTransactions();
