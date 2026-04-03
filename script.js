@@ -39,6 +39,14 @@ const salaryList = document.getElementById("salary-list");
 const giftList = document.getElementById("gift-list");
 const lists = [allTransactionList, incomeList, expenseList, salaryList, giftList];
 
+const emptyStateAll = document.querySelector(".empty-state-all");
+const emptyStateIncome = document.querySelector(".empty-state-income");
+const emptyStateExpense = document.querySelector(".empty-state-expense");
+const emptyStateSalary = document.querySelector(".empty-state-salary");
+const emptyStateGift = document.querySelector(".empty-state-gift");
+const emptyStates = [emptyStateAll, emptyStateIncome, emptyStateExpense, emptyStateSalary, emptyStateGift];
+const filterTypes = ["all", "income", "expense", "salary", "gift"];
+
 // Get items from localStorage
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
@@ -126,25 +134,25 @@ function addTransaction() {
 }
 
 // renderTransactions()  → build the list from array
-function renderTransactions() {
-    allTransactionList.innerHTML = "";
+function renderTransactions(speificTransactions, tab) {
+    tab.innerHTML = "";
 
-    transactions.forEach(transaction => {
-        const { id, type, amount, category, note, date } = transaction;
+    speificTransactions.forEach((transaction) => {
+      const { id, type, amount, category, note, date } = transaction;
 
-        const catCaps = `${category[0].toUpperCase()}${category.slice(1)}`;
-        const noteCaps = `${note[0].toUpperCase()}${note.slice(1)}`
-        // const asCurrency = `₦${amount.toLocaleString("en-NG")}`;
-        const asCurrency = new Intl.NumberFormat("en-NG", {
-          style: "currency",
-          currency: "NGN",
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 2,
-        }).format(amount);
+      const catCaps = `${category[0].toUpperCase()}${category.slice(1)}`;
+      const noteCaps = `${note[0].toUpperCase()}${note.slice(1)}`;
+      // const asCurrency = `₦${amount.toLocaleString("en-NG")}`;
+      const asCurrency = new Intl.NumberFormat("en-NG", {
+        style: "currency",
+        currency: "NGN",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      }).format(amount);
 
-        const li = document.createElement("li");
-        li.className = "transaction-item";
-        li.innerHTML = `
+      const li = document.createElement("li");
+      li.className = "transaction-item";
+      li.innerHTML = `
             <div class="${type === "income" ? "txi-ico" : "txe-ico"}">
                 ${type === "income" ? "↑" : "↓"}
             </div>
@@ -157,18 +165,18 @@ function renderTransactions() {
             </div>
         `;
 
-        const txDel = document.createElement("button");
-        txDel.classList.add("tx-del")
-        txDel.textContent = "✕";
+      const txDel = document.createElement("button");
+      txDel.classList.add("tx-del");
+      txDel.textContent = "✕";
 
-        li.append(txDel);
-        switchTabs(tabBtns, tabs, 0);
-        switchTabs(filterTypeBtns, lists, 0);
-        allTransactionList.appendChild(li);
+      li.append(txDel);
+      switchTabs(tabBtns, tabs, 0);
+      switchTabs(filterTypeBtns, lists, 0);
+      tab.appendChild(li);
 
-        txDel.addEventListener("click", () => {
-            deleteTransaction(id);
-        })
+      txDel.addEventListener("click", () => {
+        deleteTransaction(id);
+      });
     });
     renderSummary();
 }
@@ -287,8 +295,24 @@ function renderChart() {
 }
 
 // filterTransactions()  → filter by type or category
-function filterTransactions(type) {
-    
+function filterTransactions(type, tab) {
+    if (type === "all") {
+        renderTransactions(transactions, tab);
+        return;
+    }
+    // const filtered = transactions.filter((trans) => trans.type === type);
+    const filtered = transactions.filter((trans) => {
+        if (trans.type === type || trans.category === type) {
+            return trans;
+        } 
+    });
+    if (filtered.length === 0) {
+        tab.innerHTML = `<li class="empty-state">No transactions yet — add one to get started</li>`;
+        const emptyState = document.querySelector(".empty-state");
+        emptyState.style.display = "block";
+        return;
+    }
+    renderTransactions(filtered, tab);
 }
 
 // deleteTransaction()   → remove by id
@@ -309,10 +333,11 @@ function loadData() {
     if (getTransactions.length === 0 || !getTransactions) {
         renderSummary();
         allTransactionList.innerHTML = `<li class="empty-state">No transactions yet — add one to get started</li>`;
-        emptyStateall.style.display = "block";
+        const emptyState = document.querySelector(".empty-state");
+        emptyState.style.display = "block";
         return;
     }
-    renderTransactions();
+    renderTransactions(getTransactions, allTransactionList);
 }
 
 // switchTabs()         → switch tabs
@@ -370,8 +395,14 @@ filterTypeBtns.forEach((btn, i) => {
             if (other.classList.contains("active")) {
                 other.classList.remove("active");
             }
+
         })
         btn.classList.add("active");
+        lists.forEach(list => {
+            list.style.display = "none";
+        })
+        lists[i].style.display = "flex";
+        filterTransactions(filterTypes[i], lists[i]);
         switchTabs(filterTypeBtns, lists, i)
     })
 })
@@ -383,4 +414,4 @@ addTransactionBtn.addEventListener("click", (e) => {
 
 
 
-loadData();
+loadData(transactions);

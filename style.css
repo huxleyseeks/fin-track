@@ -275,6 +275,34 @@ p.sub {
   gap: .5rem;
 }
 
+.income-list {
+  /* display: flex; */
+  flex-direction: column;
+  margin-top: .8rem;
+  gap: .5rem;
+}
+
+.expense-list {
+  /* display: flex; */
+  flex-direction: column;
+  margin-top: .8rem;
+  gap: .5rem;
+}
+
+.salary-list {
+  /* display: flex; */
+  flex-direction: column;
+  margin-top: .8rem;
+  gap: .5rem;
+}
+
+.gift-list {
+  /* display: flex; */
+  flex-direction: column;
+  margin-top: .8rem;
+  gap: .5rem;
+}
+
 .transaction-item {
   width: 100%;
   display: flex;
@@ -376,6 +404,7 @@ p.sub {
 }
 
 .empty-state {
+  text-align: center;
   margin: 3rem auto 0;
   color: #333;
   font-size: .8rem;
