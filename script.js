@@ -297,6 +297,12 @@ function renderChart() {
 // filterTransactions()  → filter by type or category
 function filterTransactions(type, tab) {
     if (type === "all") {
+        if (transactions.length === 0) {
+            tab.innerHTML = `<li class="empty-state">No transactions yet — add one to get started</li>`;
+            const emptyState = document.querySelector(".empty-state");
+            emptyState.style.display = "block";
+            return;
+        }
         renderTransactions(transactions, tab);
         return;
     }
