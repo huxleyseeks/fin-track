@@ -113,7 +113,7 @@ p.sub {
   color: #555;
 }
 
-.pct {
+#pct {
   font-size: .7rem;
   color: #555;
 }
@@ -124,6 +124,13 @@ p.sub {
   background: #1e1e3b;
   border-radius: 4px;
   overflow: hidden;
+}
+
+.prog-fill {
+  border-radius: 4px;
+  height: 100%;
+  /* background: linear-gradient(90deg, rgb(99, 102, 241), rgb(139, 92, 246)); */
+  background: linear-gradient(90deg, #49de80 0%, #facc15 60%, #f77272 100%)
 }
 
 .stats-grid {
@@ -220,16 +227,16 @@ p.sub {
 
 .tab-btn.active {
   background: #1a1a2e;
+  transition: .5s ease;
 }
 
 .filters {
   display: flex;
   gap: 6px;
-  margin-bottom: 12px;
   flex-wrap: wrap;
 }
 
-.filter-btn {
+.filter-type-btn {
   font-size: 11px;
   padding: 4px 12px;
   border-radius: 20px;
@@ -240,26 +247,135 @@ p.sub {
   transition: 0.1s ease;
 }
 
-.filter-btn:hover {
+.filter-type-btn:hover {
   background: #1e1e3037;
 }
 
-.filter-btn.active {
+.filter-type-btn.active {
   background: #1e1e30;
   color: #f7fcfc;
 }
 
 .list {
   list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: none;
   width: 100%;
   min-height: 150px;
 }
 
-#empty-state {
-  /* margin: 3rem auto 0; */
+.list.active {
+  display: flex;
+}
+
+.all-transaction-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: .8rem;
+  gap: .5rem;
+}
+
+.transaction-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d0d1a;
+  border: 1px solid #1e1e30;
+  border-radius: 8px;
+  padding: .7rem;
+  gap: .6rem;
+}
+
+.transaction-item:hover {
+  background: #161623;
+}
+
+.txi-ico {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+}
+
+.txe-ico {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: rgba(248, 113, 113, 0.1);
+  color: #f87171;
+}
+
+.transaction-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-note {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ddd;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trans-t-d {
+  font-size: 11px;
+  color: #3a3a5a;
+}
+
+.txi-amt {
+  color: #4ade80;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.txc-amt {
+  color: #f77272;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.tx-del {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  border: 1px solid #222;
+  background: transparent;
+  color: #444;
+  cursor: pointer;
+  font-size: 11px;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.tx-del:hover {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid #f77272;
+  color: #f77272;
+}
+
+.empty-state {
+  margin: 3rem auto 0;
   color: #333;
   font-size: .8rem;
 }
@@ -268,18 +384,19 @@ p.sub {
   display: none;
 }
 
+.transaction-type-btns {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+
+
 #form {
   display: none;
   background: #0d0d1a;
   border: 1px solid #1e1e30;
   border-radius: 1rem;
-  padding: 1.3rem 1.3rem 2.5rem;
-}
-
-.transaction-type-btns {
-  display: flex;
-  gap: .5rem;
-  margin-bottom: 1rem;
+  padding: 1.3rem 1.3rem;
 }
 
 .trans-type-btn {
@@ -292,14 +409,15 @@ p.sub {
   background: transparent;
   cursor: pointer;
   border: 1px solid #1e1e30;
+  transition: .3s ease;
 }
 
-#income-type-btn:focus {
+.income-active {
   background: #111c21;
   color: #49de80;
   border: 1px solid #49de80;
 }
-#expense-type-btn:focus {
+.expense-active {
   background: #1f1521;
   color: #f77272;
   border: 1px solid #f77272;
@@ -312,7 +430,7 @@ p.sub {
   margin-bottom: .6rem;
 }
 
-#f-amount, #inc-input, #f-note, #f-date {
+#f-amount, #inc-category, #exp-category, #f-note, #f-date {
   padding: 10px 12px;
   font-size: 13px;
   border: 1px solid #1e1e30;
@@ -322,6 +440,10 @@ p.sub {
   outline: none;
   transition: border-color 0.15s;
   flex: 1;
+}
+
+#exp-category {
+  display: none;
 }
 
 #f-amount::placeholder, #f-note::placeholder {
@@ -350,11 +472,50 @@ p.sub {
   cursor: pointer;
   font-weight: 600;
   margin-top: 2px;
-  transition: opacity 0.15s
+  transition: opacity 0.15s;
+  transition: transform .2s ease;
+}
+
+.add-transaction:active {
+  transform: scale(.99);
+  transition: transform .2s ease;
+}
+
+#form-message {
+  font-size: .75rem;
+  color: #49de80;
+  margin-top: .5rem;
+  padding: 0 0 .5rem;
+}
+
+#form-err-message {
+  color: #f77272;
+  font-size: .75rem;
+  height: 15px;
 }
 
 #analytics {
   display: none;
+}
+
+#chart-wrap {
+  padding: 1rem;
+  width: 100%;
+  height: 320px;
+  margin: 0 auto;
+}
+
+#myDoughnutChart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#chart-empty-state {
+  display: none;
+  font-size: 0.8rem;
+  color: #555;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 
