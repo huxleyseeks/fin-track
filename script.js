@@ -313,7 +313,7 @@ function filterTransactions(type, tab) {
         } 
     });
     if (filtered.length === 0) {
-        tab.innerHTML = `<li class="empty-state">No transactions yet — add one to get started</li>`;
+        tab.innerHTML = `<li class="empty-state empty-state-income">No transactions found.</li>`;
         const emptyState = document.querySelector(".empty-state");
         emptyState.style.display = "block";
         return;
