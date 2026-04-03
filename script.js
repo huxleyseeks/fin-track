@@ -277,7 +277,7 @@ function renderChart() {
             color: "#f7fcfc",
             usePointStyle: true,
             pointStyle: "circle",
-            boxWidth: 20,
+            boxWidth: 10,
             padding: 20,
           },
         },

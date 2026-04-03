@@ -8,7 +8,7 @@ body {
   font-family: 'DM Sans', sans-serif;
   background: #08080f;
   color: #f7fcfc;
-  width: 720px;
+  max-width: 700px;
   margin: 2rem auto;
 }
 
@@ -129,8 +129,8 @@ p.sub {
 .prog-fill {
   border-radius: 4px;
   height: 100%;
-  background: linear-gradient(90deg, rgb(99, 102, 241), rgb(139, 92, 246));
-  /* background: linear-gradient(90deg, #49de80 0%, #facc15 60%, #f77272 100%) */
+  /* background: linear-gradient(90deg, rgb(99, 102, 241), rgb(139, 92, 246)); */
+  background: linear-gradient(90deg, #49de80 0%, #facc15 60%, #f77272 100%)
 }
 
 .stats-grid {
@@ -218,7 +218,7 @@ p.sub {
   background: transparent;
   color: #f7fcfc;
   font-family: inherit;
-  font-size: .75rem;
+  font-size: .7rem;
   font-weight: 700;
   padding: .6rem;
   cursor: pointer;
@@ -493,7 +493,7 @@ p.sub {
 .add-transaction {
   width: 100%;
   padding: 11px;
-  font-size: 13px;
+  font-size: .8rem;
   border-radius: 8px;
   border: none;
   background: #6366f1;
@@ -544,14 +544,14 @@ p.sub {
 }
 
 .cwc-title {
-  font-size: 13px;
+  font-size: .8rem;
   font-weight: 600;
   color: #ccc;
   margin: 0;
 }
 
 .cwc-sub {
-  font-size: 11px;
+  font-size: .7rem;
   color: #444;
   margin-bottom: 16px;
 }
@@ -569,64 +569,3 @@ p.sub {
   text-align: center;
   margin: 5rem auto;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* @media (max-width: 1040px) {
-  .page-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .main-nav {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 780px) {
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .topbar-actions {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .transaction-tab {
-    grid-template-columns: 1fr;
-  }
-
-  .main-nav {
-    grid-template-columns: repeat(2, 1fr);
-  }
-} */
