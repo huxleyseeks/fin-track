@@ -129,9 +129,8 @@ p.sub {
 .prog-fill {
   border-radius: 4px;
   height: 100%;
-  width: 0%;
-  /* background: linear-gradient(90deg, rgb(99, 102, 241), rgb(139, 92, 246)); */
-  background: linear-gradient(90deg, #49de80 0%, #facc15 60%, #f77272 100%)
+  background: linear-gradient(90deg, rgb(99, 102, 241), rgb(139, 92, 246));
+  /* background: linear-gradient(90deg, #49de80 0%, #facc15 60%, #f77272 100%) */
 }
 
 .stats-grid {
@@ -540,57 +539,38 @@ p.sub {
 
 #chart-wrap {
   height: 50%;
-  width: 50%;
+  width: 100%;
   justify-self: center;
 }
 
+.cwc-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ccc;
+  margin: 0;
+}
+
+.cwc-sub {
+  font-size: 11px;
+  color: #444;
+  margin-bottom: 16px;
+}
+
 #myDoughnutChart {
-  width: 100% !important;
+  width: 50% !important;
   height: 100% !important;
+  justify-self: center;
 }
 
 #chart-empty-state {
   display: none;
   font-size: 0.8rem;
-  color: #555;
+  color: #333;
   text-align: center;
-  margin-top: 1rem;
+  margin: 5rem auto;
 }
 
 
-.segmented {
-  display: flex;
-  background: #f4f6f7;
-  border-radius: 10px;
-  padding: 0.2rem;
-  gap: 0.2rem;
-}
-
-
-/* .segment {
-  border: 0;
-  background: transparent;
-  border-radius: 8px;
-  padding: 0.4rem 0.6rem;
-  font-family: inherit;
-  font-weight: 700;
-  color: #54616a;
-  cursor: pointer;
-}
-
-.segment.active {
-  background: #fff;
-  color: #0f766e;
-  box-shadow: 0 4px 10px rgba(18, 28, 35, 0.08);
-}
-
-.transaction-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.6rem;
-} */
 
 
 

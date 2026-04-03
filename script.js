@@ -15,6 +15,7 @@ const totalIncome = document.getElementById("total-income");
 const totalExpenses = document.getElementById("total-expenses");
 const tIncomeTrack = document.getElementById("t-income-track");
 const tExpenseTrack = document.getElementById("t-expense-track");
+const chartWrap = document.getElementById("chart-wrap");
 const doughnutCanvas = document.getElementById("myDoughnutChart");
 const chartEmptyState = document.getElementById("chart-empty-state");
 let doughnutChart = null;
@@ -63,18 +64,6 @@ let text = null;
 
 let incAmt = 0;
 let speAmt = 0;
-
-
-incomeCategory.addEventListener("change", () => {
-  value = incomeCategory.value;
-  text = incomeCategory.options[incomeCategory.selectedIndex].text;
-});
-
-expenseCategory.addEventListener("change", () => {
-  value = expenseCategory.value;
-  text = expenseCategory.options[expenseCategory.selectedIndex].text;
-});
-
 
 
 
@@ -131,6 +120,9 @@ function addTransaction() {
           btn.classList.remove("expense-active");
         }
     });
+
+    value = null;
+    text = null;
 }
 
 // renderTransactions()  → build the list from array
@@ -251,10 +243,12 @@ function renderChart() {
     }
 
     if (incAmt === 0 && speAmt === 0) {
+        chartWrap.style.display = "none";
         chartEmptyState.style.display = "block";
         return;
     }
     chartEmptyState.style.display = "none";
+    chartWrap.style.display = "block";
   doughnutChart = new Chart(doughnutCanvas, {
     type: "doughnut",
     data: {
@@ -312,6 +306,7 @@ function filterTransactions(type, tab) {
             return trans;
         } 
     });
+
     if (filtered.length === 0) {
         tab.innerHTML = `<li class="empty-state empty-state-income">No transactions found.</li>`;
         const emptyState = document.querySelector(".empty-state");
@@ -336,12 +331,12 @@ function saveData() {
 // loadData()            → load on startup
 function loadData() {
     const getTransactions = JSON.parse(localStorage.getItem("transactions"));
-    if (getTransactions.length === 0 || !getTransactions) {
-        renderSummary();
-        allTransactionList.innerHTML = `<li class="empty-state">No transactions yet — add one to get started</li>`;
-        const emptyState = document.querySelector(".empty-state");
-        emptyState.style.display = "block";
-        return;
+    if (!getTransactions || getTransactions.length === 0) {
+      renderSummary();
+      allTransactionList.innerHTML = `<li class="empty-state">No transactions yet — add one to get started</li>`;
+      const emptyState = document.querySelector(".empty-state");
+      emptyState.style.display = "block";
+      return;
     }
     renderTransactions(getTransactions, allTransactionList);
 }
@@ -401,7 +396,6 @@ filterTypeBtns.forEach((btn, i) => {
             if (other.classList.contains("active")) {
                 other.classList.remove("active");
             }
-
         })
         btn.classList.add("active");
         lists.forEach(list => {
@@ -416,6 +410,16 @@ filterTypeBtns.forEach((btn, i) => {
 addTransactionBtn.addEventListener("click", (e) => {
     e.preventDefault();
     addTransaction();
+});
+
+incomeCategory.addEventListener("change", () => {
+  value = incomeCategory.value;
+  text = incomeCategory.options[incomeCategory.selectedIndex].text;
+});
+
+expenseCategory.addEventListener("change", () => {
+  value = expenseCategory.value;
+  text = expenseCategory.options[expenseCategory.selectedIndex].text;
 });
 
 
