@@ -53,6 +53,9 @@ const errMsg = document.getElementById("form-err-message");
 let value = null;
 let text = null;
 
+let incAmt = 0;
+let speAmt = 0;
+
 
 incomeCategory.addEventListener("change", () => {
   value = incomeCategory.value;
@@ -65,6 +68,9 @@ expenseCategory.addEventListener("change", () => {
 });
 
 
+
+
+// addTransaction()      → validate and add to array
 function addTransaction() {
     const amount = parseFloat(amountInput.value);
     const category = value;
@@ -102,8 +108,6 @@ function addTransaction() {
     transactions.unshift(list);
     saveData();
     loadData();
-    // renderTransactions();
-    // renderSummary();
 
     // Empty the form
     amountInput.value = "";
@@ -121,6 +125,7 @@ function addTransaction() {
     });
 }
 
+// renderTransactions()  → build the list from array
 function renderTransactions() {
     allTransactionList.innerHTML = "";
 
@@ -168,6 +173,7 @@ function renderTransactions() {
     renderSummary();
 }
 
+// renderSummary()       → calculate balance, income, expenses
 function renderSummary() {
 
     let totBal = 0;
@@ -194,7 +200,7 @@ function renderSummary() {
         const formatted = new Intl.NumberFormat("en-NG", {
           style: "currency",
           currency: "NGN",
-          minimumFractionDigits: 0,
+          minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         }).format(num);
         return formatted;
@@ -205,6 +211,10 @@ function renderSummary() {
     totalIncome.textContent = formatToCurrency(incomeAmt);
     spentAmount.textContent = formatToCurrency(spentAmt);
     totalExpenses.textContent = formatToCurrency(spentAmt);
+
+    incAmt = incomeAmt,
+    speAmt = spentAmt;
+    renderChart();
 
     
     tIncomeTrack.textContent = `${incomeCount} ${incomeCount === 1 ? "transaction" : "transactions"}`;
@@ -217,7 +227,7 @@ function renderSummary() {
     } else {
         pct.textContent = `${Math.round(spendingRate)}%`;
     }
-    // keep progress bar from overflowing if spending > income
+
     if (Math.round(spendingRate === 0)) {
         progFill.style.width = `${0}%`;
     } else {
@@ -225,16 +235,75 @@ function renderSummary() {
     }
 }
 
+// renderChart()         → draw the doughnut chart
+function renderChart() {
+    if (doughnutChart) {
+        doughnutChart.destroy();
+        doughnutChart = null;
+    }
+
+    if (incAmt === 0 && speAmt === 0) {
+        chartEmptyState.style.display = "block";
+        return;
+    }
+    chartEmptyState.style.display = "none";
+  doughnutChart = new Chart(doughnutCanvas, {
+    type: "doughnut",
+    data: {
+      labels: ["Income", "Expenses"],
+      datasets: [
+        {
+          data: [Number(incAmt), Number(speAmt)],
+          backgroundColor: ["#49de80", "#f77272"],
+          borderColor: "#0f0f1a",
+          borderWidth: 2,
+          hoverOffset: 20,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      cutout: "65%",
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {
+            color: "#f7fcfc",
+            usePointStyle: true,
+            pointStyle: "circle",
+            boxWidth: 20,
+            padding: 20,
+          },
+        },
+        tooltip: {
+          callbacks: {
+            // label: (ctx) => `${ctx.label}: ₦${ctx.raw.toLocaleString("en-NG")}`,
+          },
+        },
+      },
+    },
+  });
+}
+
+// filterTransactions()  → filter by type or category
+function filterTransactions(type) {
+    
+}
+
+// deleteTransaction()   → remove by id
 function deleteTransaction(id) {
     transactions = transactions.filter((trans) => trans.id !== id);
     saveData();
     loadData();
 }
 
+// saveData()            → save to localStorage
 function saveData() {
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
+// loadData()            → load on startup
 function loadData() {
     const getTransactions = JSON.parse(localStorage.getItem("transactions"));
     if (getTransactions.length === 0 || !getTransactions) {
@@ -246,15 +315,7 @@ function loadData() {
     renderTransactions();
 }
 
-// addTransaction()      → validate and add to array
-// deleteTransaction()   → remove by id
-// renderTransactions()  → build the list from array
-// renderSummary()       → calculate balance, income, expenses
-// renderChart()         → draw the doughnut chart
-// filterTransactions()  → filter by type or category
-// saveData()            → save to localStorage
-// loadData()            → load on startup
-
+// switchTabs()         → switch tabs
 function switchTabs(tab, tabGr, i) {
     tab.forEach((other) => {
       if (other.classList.contains("active")) {

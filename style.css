@@ -129,6 +129,7 @@ p.sub {
 .prog-fill {
   border-radius: 4px;
   height: 100%;
+  width: 0%;
   /* background: linear-gradient(90deg, rgb(99, 102, 241), rgb(139, 92, 246)); */
   background: linear-gradient(90deg, #49de80 0%, #facc15 60%, #f77272 100%)
 }
@@ -496,13 +497,22 @@ p.sub {
 
 #analytics {
   display: none;
+  box-sizing: border-box;
+}
+
+#analytics > div {
+  background: #0d0d1a;
+  border: 1px solid #1e1e30;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 12px;
+  
 }
 
 #chart-wrap {
-  padding: 1rem;
-  width: 100%;
-  height: 320px;
-  margin: 0 auto;
+  height: 50%;
+  width: 50%;
+  justify-self: center;
 }
 
 #myDoughnutChart {

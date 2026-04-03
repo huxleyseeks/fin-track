@@ -22,17 +22,17 @@
         <section class="balance-section">
 
             <span class="balance-head">Total balance</span>
-            <h3 id="total-balance">₦0.00</h3>
+            <h3 id="total-balance"></h3>
             <div class="balance-breakdown">
                 <div class="income small">
                     <div class="dot"></div>
                     <span>Income</span>
-                    <span class="income-amount">₦0.00</span>
+                    <span class="income-amount"></span>
                 </div>
                 <div class="spent small">
                     <div class="dot s-dot"></div>
                     <span>Spent</span>
-                    <span class="spent-amount">₦0.00</span>
+                    <span class="spent-amount"></span>
                 </div>
             </div>
             <div class="progress">
@@ -50,7 +50,7 @@
                     <span>INCOME</span>
                     <div>↑</div>
                 </div>
-                <h4 id="total-income">₦0.00</h4>
+                <h4 id="total-income"></h4>
                 <span id="t-income-track">0 transactions</span>
             </div>
             <div class="expenses-stat">
@@ -58,7 +58,7 @@
                     <span>EXPENSES</span>
                     <div>↓</div>
                 </div>
-                <h4 id="total-expenses">₦0.00</h4>
+                <h4 id="total-expenses"></h4>
                 <span id="t-expense-track">0 transactions</span>
             </div>
         </section>
@@ -143,9 +143,14 @@
         </article>
 
         <article id="analytics">
-            <div id="chart-wrap">
-                <canvas id="myDoughnutChart"></canvas>
+            <div>
                 <p id="chart-empty-state">Add expense transactions to view spending analytics.</p>
+                <div id="chart-wrap">
+                    <canvas id="myDoughnutChart"></canvas>
+                </div>
+            </div>
+            <div>
+                
             </div>
         </article>
     </main>
