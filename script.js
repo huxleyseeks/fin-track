@@ -217,8 +217,7 @@ function renderSummary() {
 
     incAmt = incomeAmt,
     speAmt = spentAmt;
-    renderChart();
-
+    
     
     tIncomeTrack.textContent = `${incomeCount} ${incomeCount === 1 ? "transaction" : "transactions"}`;
     tExpenseTrack.textContent = `${expenseCount} ${expenseCount === 1 ? "transaction" : "transactions"}`;
@@ -234,14 +233,15 @@ function renderSummary() {
     if (Math.round(spendingRate === 0)) {
         progFill.style.width = `${0}%`;
     } else {
-        progFill.style.width = `${Math.min(spendingRate, 100)}%`;
+      progFill.style.width = `${Math.min(spendingRate, 100)}%`;
     }
+    renderChart();
 }
 
 // renderChart()         → draw the doughnut chart
 function renderChart() {
-    if (doughnutChart) {
-        doughnutChart.destroy();
+  if (doughnutChart) {
+    doughnutChart.destroy();
         doughnutChart = null;
     }
 
@@ -289,6 +289,9 @@ function renderChart() {
       },
     },
   });
+  // if (!doughnutChart) {
+  //   return;
+  // }
 }
 
 // filterTransactions()  → filter by type or category
