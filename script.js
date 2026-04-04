@@ -269,7 +269,7 @@ function renderChart() {
     options: {
       responsive: true,
       maintainAspectRatio: true,
-      cutout: "65%",
+      cutout: "70%",
       plugins: {
         legend: {
           position: "bottom",
