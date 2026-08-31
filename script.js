@@ -138,12 +138,12 @@ function renderTransactions(speificTransactions, tab) {
       const catCaps = `${category[0].toUpperCase()}${category.slice(1)}`;
       const noteCaps = `${note[0].toUpperCase()}${note.slice(1)}`;
       // const asCurrency = `₦${amount.toLocaleString("en-NG")}`;
-      const asCurrency = new Intl.NumberFormat("en-NG", {
-        style: "currency",
-        currency: "NGN",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
-      }).format(amount);
+      const asCurrency = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2,
+}).format(amount);
 
       const li = document.createElement("li");
       li.className = "transaction-item";
