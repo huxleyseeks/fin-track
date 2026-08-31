@@ -200,14 +200,14 @@ function renderSummary() {
     })
 
     function formatToCurrency(num) {
-        const formatted = new Intl.NumberFormat("en-NG", {
-          style: "currency",
-          currency: "NGN",
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }).format(num);
-        return formatted;
-    }
+    const formatted = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(num);
+    return formatted;
+}
 
     totalBalance.textContent = formatToCurrency(totBal);
     incomeAmount.textContent = formatToCurrency(incomeAmt);
